@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.bellasartescusco.edu.pe/ccomputo/espera_escala_pagos.php by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 Sep 2017 05:27:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<meta content="" name="description">
+	<meta content="" name="author">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="-1">
+	 <!-- etiquetas para ´no guardar cache-->
+	  <meta http-equiv="Pragma" content="no-cache">
+	  <meta http-equiv="expires" content="0">
+	  <!-- etiquetas para ´no guardar cache-->
+	<link href="#" rel="shortcut icon">
+	<title>Centro de cómputo</title>
+	
+	<script type="text/javascript">
+		function pasaje(elemento){
+			
+			numero=document.getElementById(elemento.id).value;
+
+			if (numero=="sicaa") {
+				location.href="administrador/scripts/logueo.html";
+			}
+				
+				
+		}
+</script>	<script type='text/javascript'>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+	  ga('create', 'UA-48005943-1', 'bellasartescusco.edu.pe');
+	  ga('send', 'pageview');
+	</script>
+
+	<link rel="stylesheet" href="../css/bootstrap.min.css">			
+  	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+  	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  	
+		<!--HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --> 
+		<!--[if lt IE 9]> 
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script> 
+		<script src="../js/Respond.js"></script>
+		<![endif]-->
+	<link href="http://fonts.googleapis.com/css?family=Chelsea+Market" rel="stylesheet" type="text/css">
+</head>
+<body>
+<!--<script type="text/javascript" src='../js/snow_efect.js'></script> --><!-- Efecto nieve navideña -->
+
+
+<div id="flake">*</div>
+
+	<!-- *******************************   INICIO ENCABEZADO        ********************************** -->
+	<div class="col-md-10 col-md-offset-1">
+	<div class="row">
+		<div class="navbar-wrapper">
+	      <div class="container">
+	        <div role="navigation" class="navbar navbar-inverse navbar-static-top ">
+	          <div class="container ">
+	            <div class="navbar-header">
+	              <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+	                <span class="sr-only">Toggle navigation</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	              </button>
+	              <a href="../index.html" class="navbar-brand">Bellas Artes Cusco</a>
+	              
+	            </div>
+	            <div class="navbar-collapse collapse" >
+	              <ul class="nav navbar-nav">
+	              <li><a href="espera_escala_pagos.html">Escala de pagos 2017-II</a></li> 
+	                <!-- <li><a href="#">Comunicados</a></li>-->
+
+	              </ul>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+		</div>
+	</div>
+  	<!--********************************  FINENCABEZADO  *************************************** --><script type='text/javascript'>
+	function objetoAjax(){
+		var xmlhttp = false;
+		try {
+			xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e) {
+
+			try {
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (E) {
+				xmlhttp = false; 
+			}
+		}
+
+		if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+		  xmlhttp = new XMLHttpRequest();
+		}
+		return xmlhttp;
+	}
+	function obtener_monto_a_pagar(){
+         //Recogemos los valores introducimos en los campos de texto
+		//alumno = document.formulario2.txtcodigo2.value;
+		//alert(ide);
+		var alumno = document.getElementById('txtcodigo').value;
+		var sede = document.getElementById('cbx_sede').value;
+		var div = document.getElementById('div_esc');
+		//instanciamos el objetoAjax
+		var ajax = objetoAjax();
+		//Abrimos una conexión AJAX pasando como parámetros el método de envío, y el archivo que realizará las operaciones deseadas
+		ajax.open("POST/index.html","scripts/consulta_escala.html",true);
+		//cuando el objeto XMLHttpRequest cambia de estado, la función se inicia
+		ajax.onreadystatechange = function() {
+             //Cuando se completa la petición, mostrará los resultados 
+             //borramos los nodos hijos
+			if (ajax.readyState == 4){
+				var cell = document.getElementById("div_esc");
+				if ( cell.hasChildNodes() )
+				{
+					while ( cell.childNodes.length >= 1 )
+					{
+						cell.removeChild( cell.firstChild );
+					}
+				}
+				//El método responseText() contiene el texto de nuestro 'consultar.php'. Por ejemplo, cualquier texto que mostremos por un 'echo'
+				//txtapaterno.value = (ajax.responseText) 
+				cadena=(ajax.responseText);
+				//alert(cadena);
+				array=  cadena.split("*");
+				if (array[0]=='0') {
+					var titulo=document.createElement('h2');
+					titulo.setAttribute('class','text-center');
+					var t=document.createTextNode('¡No estás Apto!');
+					
+					var titulo2=document.createElement('h3');
+					titulo2.setAttribute('class','text-center');
+					var t2=document.createTextNode('Debes apersonarte a la Oficina de Centro de Cómputo.');
+
+					var titulo3=document.createElement('h4');
+					titulo3.setAttribute('class','text-center');
+					var t3=document.createTextNode('En caso de alumnos que estén tramitando Reinicio de Estudios, Traslados internos y externos o Ingresantes. Su matrícula es presencial en la Oficina de Centro de Cómputo.');
+					
+					titulo.appendChild(t);
+					titulo2.appendChild(t2);
+					titulo3.appendChild(t3);
+					div.appendChild(titulo);
+					div.appendChild(titulo2);
+					div.appendChild(titulo3);
+
+				}else if(array[0]=='1'){
+				//	$mensaje=$habil.'*'.$codigo.'*'.$nombres.'*'.$apaterno.'*'.$amaterno.'*'.$cant_apro.'*'.$cant_desa.'*'.$cant_imp.'*'.$cant_nsp.'*'.$cant_ret.'*'.$contador2.'*'.$total;
+					cod=array[1];
+					nm=array[2];
+					ap=array[3];
+					am= array[4];
+					apro= array[5];
+					desa= array[6];
+					imp= array[7];
+					nsp=array[8];
+					ret=array[9];
+					cant_cursos= array[10];
+					mont=array[11];
+					desc=array[12];
+					mult=array[13];
+					semestre_texto='2016-II';
+
+					var titulo=document.createElement('h2');
+					titulo.setAttribute('class','text-center');
+					var t=document.createTextNode('¡Estás Apto!');
+					titulo.appendChild(t);
+					div.appendChild(titulo);
+
+					var datos=document.createElement('h4');
+					var t=document.createTextNode(cod+' '+nm+' '+ap+' '+am);
+					datos.setAttribute('class','text-center');
+					datos.appendChild(t);
+					div.appendChild(datos);
+
+					var t_apro=document.createElement('h5');
+					//t_apro.setAttribute('class','text-center')
+					var t1=document.createTextNode('Cursos Aprobados el '+semestre_texto+':_________ ');
+					t_apro.appendChild(t1);
+					var t2=document.createTextNode(apro);
+					t_apro.appendChild(t2);
+					div.appendChild(t_apro);
+
+					var t_desa=document.createElement('h5');
+					//t_apro.setAttribute('class','text-center')
+					var t1=document.createTextNode('Cursos Desaprobados el '+semestre_texto+':______ ');
+					t_desa.appendChild(t1);
+					var t2=document.createTextNode(desa);
+					t_desa.appendChild(t2);
+					div.appendChild(t_desa);
+
+					var t_imp=document.createElement('h5');
+					//t_apro.setAttribute('class','text-center')
+					var t1=document.createTextNode('Cursos Impedidos el '+semestre_texto+':_________ ');
+					t_imp.appendChild(t1);
+					var t2=document.createTextNode(imp);
+					t_imp.appendChild(t2);
+					div.appendChild(t_imp);
+
+					var t_ret=document.createElement('h5');
+					//t_apro.setAttribute('class','text-center')
+					var t1=document.createTextNode('Cursos Retirados el '+semestre_texto+':__________ ');
+					t_ret.appendChild(t1);
+					var t2=document.createTextNode(ret);
+					t_ret.appendChild(t2);
+					div.appendChild(t_ret);	
+
+					var t_nsp=document.createElement('h5');
+					//t_apro.setAttribute('class','text-center')
+					var t1=document.createTextNode('Cursos NSP el '+semestre_texto+':______________ ');
+					t_nsp.appendChild(t1);
+					var t2=document.createTextNode(nsp);
+					t_nsp.appendChild(t2);
+					div.appendChild(t_nsp);	
+
+					var t_desc=document.createElement('h5');
+					//t_apro.setAttribute('class','text-center')
+					var t1=document.createTextNode('Descuento:____________________ ');
+					t_desc.appendChild(t1);
+					var t2=document.createTextNode(desc);
+					t_desc.appendChild(t2);
+					div.appendChild(t_desc);
+
+					var t_multa=document.createElement('h5');
+					//t_apro.setAttribute('class','text-center')
+					var t1=document.createTextNode('Multa:________________________ ');
+					t_multa.appendChild(t1);
+					var t2=document.createTextNode('S/.'+mult+' ');
+					t_multa.appendChild(t2);
+					div.appendChild(t_multa);		
+
+					var t_monto=document.createElement('h2');
+					t_monto.setAttribute('class','text-center')
+					var t1=document.createTextNode('El Monto a Pagar en el BN es:');
+					t_monto.appendChild(t1);
+					var t_monto2=document.createElement('h3');
+					t_monto2.setAttribute('class','text-center');
+					var t2=document.createTextNode('S/. '+mont+' Nuevos Soles');
+					t_monto2.appendChild(t2);
+					/*var t_monto3=document.createElement('h4');
+					t_monto3.setAttribute('class','text-center');
+					var t2=document.createTextNode('S/. '+mont+' No te olvides que debes pagar indicando que tu código ');
+					t_monto3.appendChild(t2);*/
+					
+					div.appendChild(t_monto);		
+					div.appendChild(t_monto2);	
+					//div.appendChild(t_monto3);		
+
+				}else{
+					var titulo=document.createElement('h2');
+					titulo.setAttribute('class','text-center');
+					var t=document.createTextNode('¡Código Incorrecto!');
+					
+					var titulo2=document.createElement('h3');
+					titulo2.setAttribute('class','text-center')
+					var t2=document.createTextNode('Intenta otra vez.');
+					
+					titulo.appendChild(t);
+					titulo2.appendChild(t2);
+					div.appendChild(titulo);
+					div.appendChild(titulo2);
+				}
+			}
+		}
+
+		//Llamamos al método setRequestHeader indicando que los datos a enviarse están codificados como un formulario. 
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+		//enviamos las variables a 'consulta.php' 
+		ajax.send("&txtcodigo="+alumno+"&cbxsede="+sede);
+	}
+</script>
+	<div class="col-md-8 col-md-offset-2 alert alert-success">
+		<ul>
+			<li>Solo los alumnos que se hayan matriculado en el semestre 2017-I pueden matricularse vía internet.</li>
+			<li>El Sistema de Matrículas y pagos por el Banco de la Nación estará abierto del <b>07 al 13 de agosto del 2017 y Rezagados con recargo del 20% del 14 al 20 de agosto del 2017</b></li>
+			<!-- <li><b>Las siguientes asignaturas: "PP920P, PP970P, PP921E, PP971E, PP922D, PP972D P923C, PP973C, PP924R, PP974R, PP922P, PP972P", tienen nota aprovatoria mínima de 13.</b></li>-->
+			<li>Recuerda que de haber algún error en el monto de tu Escala de Pagos, debes apersonarte a la oficina de Centro de Cómputo ó enviar un mensaje a nuestro correo "ccomputo@bellasartescusco.edu.pe", te responderemos en la brevedad posible.</li>
+			<li><b>LAS TARIFAS EDUCATIVAS SON:</b>
+				<ul>
+					<li>Matrícula alumnos todos los ciclos y especialidades: &thinsp;&thinsp; S/. 56.00 Nuevos Soles.</li>
+					<!-- <li>Pago por Carné Universitario y Biblioteca S/. 20.00 y S/. 1.00 (Obligatorio).</li> -->
+					<li>Costo único por asignatura desaprobada: &thinsp;&thinsp;S/. 34.70 Nuevos Soles.</li>
+					<!-- <li>Costo por Asignatura Impedida: &thinsp;&thinsp;S/. 30.00 Nuevos Soles.</li>
+					<li>Costo por Asignatura NSP: &thinsp;&thinsp;S/.35.00 Nuevos Soles.</li>
+					<li>Costo por Asignatura Retirada: &thinsp;&thinsp;S/. 0.00 Nuevos Soles.</li> -->
+				</ul>
+			</li>
+		</ul>
+		
+	</div>
+	
+	<div  class="col-md-2 col-md-offset-2" align='center'>
+		<h3 class='text-center'><b>REVISA COMO DEBES MATRICULARTE (VIDEO)</b></h3>
+		<a  href="https://www.youtube.com/watch?v=FgAxtitqMes" target='_blank'><img class='img-responsive' src="img/logo_yt.jpg"></a>
+	</div>
+	<div class="col-md-3 " align='center'>
+		<div class="form-group">
+			<h2 class='text-center'>Ingresa tu Código de Alumno y la Sede a la que perteneces</h2>
+			<div class="input-group">
+			    <div class="input-group-addon">Código Alumno</div>
+			    <input name='txtcodigo' id='txtcodigo' class="form-control" type="text" maxlength='7' size='8' placeholder="Código">
+		    </div>
+		</div>
+		<div class='form-group'>
+			<div class="col-md-7 col-md-offset-3">
+			   	<select class="form-control" id="cbx_sede" name='cbx_sede'>
+			   		<option value="CUSCO">Sede Cusco</option>
+			   		<option value="CALCA">Sede Calca</option>
+			   		<option value="CHECACUPE">Sede Checacupe</option>
+			   	</select>
+		   	</div>
+		</div> 
+		<div class='form-group'>
+			<div class="col-md-8 col-md-offset-2 ">
+				<p></p>
+		  		<button type='button' class=' btn btn-primary' onclick='obtener_monto_a_pagar()'>Consultar Monto a pagar.</button>
+		  	</div>
+		</div> 
+	</div>
+	<div name='div_esc' id='div_esc' name='monto_mostrar' class="col-md-4 alert alert-info" >
+		
+	</div>
+	
+
+
+
+
