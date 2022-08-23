@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '198.20.95.42'; 
-$db['default']['username'] = 'bellasac_td';
-$db['default']['password'] = 'Contrasenia';
-$db['default']['database'] = 'bellasac_tramitedocumentariodb';
+$db['default']['hostname'] = ''; 
+$db['default']['username'] = '';
+$db['default']['password'] = '';
+$db['default']['database'] = '';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
